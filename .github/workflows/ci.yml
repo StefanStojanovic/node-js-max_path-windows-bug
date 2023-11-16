@@ -9,7 +9,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Get OS name for bug report
-        run: "$([Environment]::OSVersion.VersionString)"
+        run: "$([Environment]::OSVersion.VersionString) $([Environment]::Is64BitOperatingSystem)"
       - name: Checkout repo
         uses: actions/checkout@v4
       - name: Use Node.js
