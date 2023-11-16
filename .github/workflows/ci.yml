@@ -12,6 +12,8 @@ jobs:
         run: |
           "$([Environment]::OSVersion.VersionString)"
           "$([Environment]::Is64BitOperatingSystem)"
+      - name: Check LongPathsEnabled
+        run: (Get-ItemProperty "HKLM:System\CurrentControlSet\Control\FileSystem").LongPathsEnabled
       - name: Checkout repo
         uses: actions/checkout@v4
       - name: Use Node.js
