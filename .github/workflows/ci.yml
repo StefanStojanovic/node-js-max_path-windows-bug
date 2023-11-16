@@ -1,0 +1,35 @@
+name: CI
+on:
+  push:
+    branches:
+      - '**'
+jobs:
+  ci:
+    name: ci
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+
+      # Working (short path)
+      - run: npm install
+      - name: Run program (working)
+        run: node eslint.config.js
+
+      # Crashes (long path)
+      - name: Make directory with long path
+        run: mkdir long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\
+      - name: Copy files to long path
+        run: |
+          cp eslint.config.js long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\
+          cp index.js long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\
+          cp package.json long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\
+      - run: npm install
+        working-directory: long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\
+      - name: Run program (crashes)
+        run: node eslint.config.js
+        working-directory: long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\
