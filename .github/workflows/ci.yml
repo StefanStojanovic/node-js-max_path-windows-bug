@@ -21,7 +21,7 @@ jobs:
         with:
           node-version: 'lts/*'
 
-      # Working (short path)
+      # Working (short path) - change line to trigger workflow
       - run: npm install
       - name: Run program (working)
         run: node eslint.config.js
