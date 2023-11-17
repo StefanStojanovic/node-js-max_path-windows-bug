@@ -21,7 +21,7 @@ jobs:
         with:
           node-version: 'lts/*'
 
-      # Working (short path) - change line to trigger workflow
+      # Working (short path)
       - run: npm install
       - name: Run program (working)
         run: node eslint.config.js
@@ -34,6 +34,11 @@ jobs:
           cp eslint.config.js long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\
           cp index.js long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\
           cp package.json long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\
+
+      # Running anything from this working directory should crash because of the path length
+      - run: node -v
+        working-directory: long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\
+      
       - run: npm install
         working-directory: long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\long-path\
       - name: Run program (crashes)
